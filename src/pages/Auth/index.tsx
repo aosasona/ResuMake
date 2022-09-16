@@ -1,4 +1,5 @@
 import {FormEvent, useState} from "react";
+import InputField from "../../components/InputField";
 import Layout from "../../components/Layout";
 import {handleFormSubmit} from "../../services/auth";
 
@@ -28,13 +29,14 @@ export default function Auth() {
   return (
 	<Layout title={"Authentication"}>
 	  <div className="mt-[10vh]">
-		<section className="lg:w-2/6 2xl:w-1/5 bg-indigo-100 px-10 py-10 mx-auto">
-		  <h1 className="text-5xl text-neutral-700">Sign-In</h1>
-		  <p className="mt-4 text-sm text-neutral-400">
+		<section className="lg:w-2/6 2xl:w-1/5 bg-white px-10 py-16 mx-auto transition-all">
+		  <h1 className="text-5xl font-bold text-neutral-700">Welcome</h1>
+		  <p className="mt-2 text-sm text-neutral-500 px-1">
 			Use any of the authentication methods below to sign-in or create an account
 		  </p>
-		  <form onSubmit={handleEmailAuth} className="mt-8">
-			Hqllo
+		  <form onSubmit={handleEmailAuth} className="flex flex-col gap-2 mt-8 transition-all">
+			<InputField name="email" type="email" data={data} label={"E-mail address"} onChange={setData}/>
+			<InputField name="password" type="password" data={data} label={"Password"} onChange={setData}/>
 		  </form>
 		</section>
 	  </div>
