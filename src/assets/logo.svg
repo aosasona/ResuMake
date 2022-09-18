@@ -1,6 +1,5 @@
-<svg width="750" height="745" viewBox="0 0 750 745" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M499 0H0V495H249V245H499V0Z" fill="#584CA2"/>
-<rect x="750" y="745" width="250" height="250" transform="rotate(180 750 745)" fill="#BBB1FB"/>
-<rect x="749" y="495" width="250" height="250" transform="rotate(180 749 495)" fill="#BBB1FB"/>
-<rect x="500" y="745" width="250" height="250" transform="rotate(180 500 745)" fill="#BBB1FB"/>
+<svg width="714" height="750" viewBox="0 0 714 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M714 675C714 716.421 680.422 750 639 750L465 750H464.001H290.001C248.579 750 215.001 716.421 215.001 675L215.001 575C215.001 533.579 248.579 500 290.001 500H389.001C430.422 500 464.001 466.421 464.001 425L464.001 325C464.001 283.579 497.579 250 539.001 250L639 250C680.422 250 714 283.579 714 325L714 500V675Z" fill="black"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 75C0 33.5786 33.5786 0 75 0L249 0L250 0L424 0C465.421 0 499 33.5786 499 75V175C499 216.421 465.421 250 424 250H325C283.579 250 250 283.579 250 325V425C250 466.421 216.421 500 175 500H75C33.5786 500 0 466.421 0 425L0 250L0 75Z" fill="black"/>
+<circle cx="359.5" cy="380.5" r="36.5" fill="black"/>
 </svg>

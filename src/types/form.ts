@@ -1,4 +1,4 @@
-import {MouseEventHandler} from 'react';
+import {MouseEventHandler, ReactNode} from 'react';
 
 export interface InputFieldProps {
   name: string;
@@ -12,13 +12,17 @@ export interface InputFieldProps {
 
 export interface ButtonProps {
   type?: "submit" | "button" | "reset";
+  text?: string;
   color?: string;
   bg?: string;
   hoverColor?: string;
-  text: string;
+  hoverBg?: string;
+  px?: number;
+  py?: number;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   loading?: boolean;
+  children?: ReactNode;
 }
 
 export interface SpinnerProps {
