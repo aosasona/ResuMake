@@ -5,17 +5,19 @@ import Spinner from "./Spinner";
 const Button: FC<ButtonProps> = ({
   type = "button",
   text = "Submit",
-  className,
+  bg = "bg-primary",
+  color = "text-white",
+  hoverColor = "hover:text-white",
   loading,
   disabled,
   onClick,
 }) => {
   return (
 	<button
-	  className={className ||
-		"bg-primary text-center text-white py-6 hover:bg-dark transition-all disabled:opacity-50"
-		+ " disabled:cursor-not-allowed"
-		+ (loading ? " bg-opacity-5 cursor-not-allowed" : "")}
+	  className={
+		`${bg} ${color} ${hoverColor} w-full text-center py-5 hover:bg-dark transition-all disabled:opacity-50 disabled:cursor-not-allowed`
+		+ (loading ? " bg-opacity-5 cursor-not-allowed" : "")
+	  }
 	  type={type}
 	  onClick={onClick}
 	  disabled={disabled}

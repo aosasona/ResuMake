@@ -46,7 +46,7 @@ const InputField: FC<InputFieldProps> = ({
 		onChange={handleChange}
 		onFocus={() => setIsFocused(true)}
 		onBlur={() => setIsFocused(false)}
-		className="text-neutral-700 placeholder-neutral-400 focus:outline-none border border-neutral-600 focus:border-b-primary focus:border-x-0 focus:border-t-0 focus:py-3 focus:bg-transparent focus:px-0 px-6 py-5"
+		className="text-base text-neutral-700 placeholder-neutral-400 focus:outline-none border border-neutral-400 focus:border-b-primary focus:border-x-0 focus:border-t-0 focus:py-3 focus:bg-transparent focus:px-0 px-4 py-4"
 	  />
 	</div>
   );

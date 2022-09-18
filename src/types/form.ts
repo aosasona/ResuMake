@@ -12,11 +12,13 @@ export interface InputFieldProps {
 
 export interface ButtonProps {
   type?: "submit" | "button" | "reset";
+  color?: string;
+  bg?: string;
+  hoverColor?: string;
   text: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   loading?: boolean;
-  className?: string;
 }
 
 export interface SpinnerProps {

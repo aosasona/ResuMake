@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
 import Auth from "./pages/Auth";
+import NotFound from "./pages/Errors/NotFound";
 
-const router = createBrowserRouter([
+const rawRoutes = [
   {
 	path: "/auth",
 	element: <Auth/>,
@@ -17,7 +18,20 @@ const router = createBrowserRouter([
 	path: "terms-and-conditions",
 	element: <div>Terms</div>,
   },
-]);
+  {
+	path: "*",
+	element: <NotFound/>,
+  },
+]
+
+const routes = rawRoutes.map((route) => {
+  return {
+	...route,
+	errorElement: <NotFound/>,
+  }
+})
+
+const router = createBrowserRouter(routes);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,

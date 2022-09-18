@@ -11,7 +11,14 @@ html, body {
     font-weight: 500;
     font-size: 13px;
     color: rgb(60 60 60);
-    background-color: rgb(224 231 255 / 50%);
+    background-color: rgb(224 231 255 / 25%);
+}
+
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .spinner {
