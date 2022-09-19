@@ -39,7 +39,7 @@ const HeroSection = () => {
 
   return (
 	<section
-	  className="block grid grid-cols-1 lg:grid-cols-2 gap-2 min-h-screen max-h-screen h-screen bg-darker text-white pt-[15vh] lg:pt-0">
+	  className="block grid grid-cols-1 lg:grid-cols-2 gap-2 min-h-screen bg-darker text-white pt-[15vh] lg:pt-0">
 	  <div
 		className="lg:flex lg:items-center h-full w-[86vw] lg:w-5/6 2xl:w-4/5 mx-auto">
 		<div>
