@@ -49,7 +49,7 @@ const HeroSection = () => {
 		  <HeaderText>
 			<span ref={secondRef}/>
 		  </HeaderText>
-		  <p className="lg:w-5/6 text-lg text-neutral-400 font-medium my-8">
+		  <p className="lg:w-5/6 text-base lg:text-lg text-neutral-400 font-medium my-8">
 			With a simple, easy-to-use user interface, you can make a great resume in a matter of minutes. Customize and expand templates to
 			fit your needs, or even better, <b>code</b> your own templates.
 		  </p>
