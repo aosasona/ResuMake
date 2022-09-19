@@ -1,6 +1,7 @@
 import {ReactNode} from "react";
 
 export interface LayoutProps {
-  children: ReactNode,
-  title: string
+  children: ReactNode;
+  title: string;
+  allowMobile?: boolean;
 }

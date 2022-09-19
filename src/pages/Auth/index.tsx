@@ -44,9 +44,9 @@ export default function Auth() {
   }
 
   return (
-	<Layout title="Authenticate">
+	<Layout title="Authenticate" allowMobile={true}>
 	  <div className="mt-[10vh]">
-		<section className="lg:w-2/6 2xl:w-1/5 bg-white px-10 pt-8 pb-12 mx-auto transition-all">
+		<section className="w-[88vw] lg:w-2/6 2xl:w-1/5 bg-white px-8 lg:px-10 pt-8 pb-12 mx-auto transition-all">
 		  <div className="flex flex-col gap-6 items-center">
 			<img src={Logo} alt="logo" className="w-10 aspect-square mx-auto mt-5"/>
 			<h4 className="w-5/6 mx-auto text-sm text-neutral-500 text-center">
