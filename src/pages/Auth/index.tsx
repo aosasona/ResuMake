@@ -56,9 +56,9 @@ export default function Auth() {
 		  <form onSubmit={handleEmailAuth} className="flex flex-col gap-3 mt-6 transition-all">
 			<ErrorBox status={status} setStatus={setStatus}/>
 			<InputField name="email" type="email" data={data} label={"E-mail address"} onChange={setData}/>
-			<div className="flex flex-col gap-1 mb-3">
+			<div className="flex flex-col gap-2 mb-3">
 			  <InputField name="password" type="password" data={data} label={"Password"} onChange={setData}/>
-			  <Link to="/forgot-password" className="text-primary text-sm font-medium hover:opacity-60 ">
+			  <Link to="/forgot-password" className="text-primary text-sm font-medium self-end hover:opacity-60 ">
 				Forgot password?
 			  </Link>
 			</div>

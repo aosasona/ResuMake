@@ -4,8 +4,13 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
 import Auth from "./pages/Auth";
 import NotFound from "./pages/Errors/NotFound";
+import Home from "./pages/Home";
 
 const rawRoutes = [
+  {
+	path: "/",
+	element: <Home/>,
+  },
   {
 	path: "/auth",
 	element: <Auth/>,

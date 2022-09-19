@@ -2,13 +2,13 @@ import {FC} from "react";
 import {ButtonProps} from "../types/form";
 import Spinner from "./Spinner";
 
-const Button: FC<ButtonProps> = ({
+const HeroButton: FC<ButtonProps> = ({
   children,
   type = "button",
   text = "Submit",
   bg = "bg-primary",
   px = 0,
-  py = 5,
+  py = 8,
   color = "text-white",
   hoverColor = "hover:text-neutral-700",
   hoverBg = "hover:bg-neutral-200",
@@ -19,7 +19,7 @@ const Button: FC<ButtonProps> = ({
   return (
 	<button
 	  className={
-		`${color} ${hoverBg} w-full text-sm text-center py-${py} px-${px} transition-all disabled:opacity-50 disabled:cursor-not-allowed `
+		`${color} ${hoverBg} w-full text-base text-center py-6 lg:py-8 px-${px} transition-all disabled:opacity-50 disabled:cursor-not-allowed `
 		+ (loading ? "bg-neutral-200 hover:bg-neutral-100 cursor-not-allowed" : `${bg} ${hoverColor}`)
 	  }
 	  type={type}
@@ -31,4 +31,4 @@ const Button: FC<ButtonProps> = ({
   );
 }
 
-export default Button;
+export default HeroButton;

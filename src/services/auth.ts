@@ -20,7 +20,6 @@ export const handleAuthSubmit = async (data: {
 	password,
   }, {
 	shouldCreateUser: true,
-	redirectTo: "/resume",
   })
 
   if (error) {
