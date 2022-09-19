@@ -1,16 +1,23 @@
 import {FormEvent, useState} from "react";
 import {BsArrowRight} from "react-icons/bs";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Logo from "../../assets/logo.svg";
 import Button from "../../components/Button";
 import ErrorBox from "../../components/ErrorBox";
 import InputField from "../../components/InputField";
 import Layout from "../../components/Layout";
-import {handleAuthSubmit} from "../../services/auth";
+import useAuth from "../../hooks/useAuth";
+import {handleAuthSubmit, handleGithubAuth, handleGoogleAuth} from "../../services/auth";
 import {AuthDataState} from "../../types/auth";
 import {handleError} from "../../utils/handler";
 
 export default function Auth() {
+  const navigate = useNavigate()
+  const {user} = useAuth();
+
+  if (user) {
+	navigate("/resume");
+  }
 
   const [status, setStatus] = useState({
 	loading: false,
@@ -21,6 +28,15 @@ export default function Auth() {
 	email: "",
 	password: "",
   })
+
+  const filterAndShowError = (error: unknown) => {
+	const msg = handleError(error)
+	setStatus({
+	  loading: false,
+	  error: true,
+	  message: msg,
+	})
+  }
 
 
   const handleEmailAuth = async (e: FormEvent<HTMLFormElement>) => {
@@ -34,19 +50,40 @@ export default function Auth() {
 	  return
 	}
 	catch (e: unknown) {
-	  const msg = handleError(e)
+	  filterAndShowError(e)
+	}
+  }
+
+  const signInWithGithub = async () => {
+	try {
 	  setStatus({
-		loading: false,
-		error: true,
-		message: msg,
+		...status,
+		loading: true,
 	  })
+	  await handleGithubAuth()
+	}
+	catch (e: unknown) {
+	  filterAndShowError(e)
+	}
+  }
+
+  const signInWithGoogle = async () => {
+	try {
+	  setStatus({
+		...status,
+		loading: true,
+	  })
+	  await handleGoogleAuth()
+	}
+	catch (e: unknown) {
+	  filterAndShowError(e)
 	}
   }
 
   return (
 	<Layout title="Authenticate" allowMobile={true}>
 	  <div className="mt-[10vh]">
-		<section className="w-[88vw] lg:w-2/6 2xl:w-1/5 bg-white px-8 lg:px-10 pt-8 pb-12 mx-auto transition-all">
+		<section className="w-[90vw] lg:w-2/6 2xl:w-1/5 bg-white px-8 lg:px-10 pt-8 pb-12 mx-auto transition-all">
 		  <div className="flex flex-col gap-6 items-center">
 			<img src={Logo} alt="logo" className="w-10 aspect-square mx-auto mt-5"/>
 			<h4 className="w-5/6 mx-auto text-sm text-neutral-500 text-center">
@@ -80,6 +117,7 @@ export default function Auth() {
 			  hoverBg="hover:bg-neutral-900"
 			  text="Google"
 			  type="button"
+			  onClick={signInWithGoogle}
 			/>
 			<Button
 			  bg="bg-neutral-900"
@@ -87,6 +125,7 @@ export default function Auth() {
 			  hoverBg="hover:bg-neutral-100"
 			  text="Github"
 			  type="button"
+			  onClick={signInWithGithub}
 			/>
 		  </div>
 		</section>

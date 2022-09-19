@@ -1,5 +1,9 @@
+import AlertError from "../errors/AlertError";
 import FormError from "../errors/FormError";
 import supabase from "../utils/supabase";
+
+const siteUrl = window.location.host
+const redirectUrl = `http://${siteUrl}/resume`
 
 export const handleAuthSubmit = async (data: {
   email: string;
@@ -20,6 +24,7 @@ export const handleAuthSubmit = async (data: {
 	password,
   }, {
 	shouldCreateUser: true,
+	redirectTo: redirectUrl,
   })
 
   if (error) {
@@ -28,3 +33,41 @@ export const handleAuthSubmit = async (data: {
 
   return {user, session};
 };
+
+export const handleGithubAuth = async () => {
+  const {user, session, error} = await supabase.auth.signIn({
+	provider: "github",
+  }, {
+	shouldCreateUser: true,
+	redirectTo: redirectUrl,
+  });
+
+  if (error) {
+	throw new FormError(error?.message);
+  }
+
+  return {user, session};
+}
+
+export const handleGoogleAuth = async () => {
+  const {user, session, error} = await supabase.auth.signIn({
+	provider: "google",
+  }, {
+	shouldCreateUser: true,
+	redirectTo: redirectUrl,
+  });
+
+  if (error) {
+	throw new FormError(error?.message);
+  }
+
+  return {user, session};
+}
+
+export const handleAuthLogout = async () => {
+  const {error} = await supabase.auth.signOut();
+
+  if (error) {
+	throw new AlertError(error?.message);
+  }
+}

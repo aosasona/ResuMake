@@ -1,54 +1,27 @@
-import React, {useEffect, useRef} from "react";
+import React from "react";
 import {useNavigate} from "react-router-dom";
-import Typed from 'typed.js';
+import TextLoop from "react-text-loop";
 import HeroButton from "./HeroButton";
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const firstRef = useRef(null);
-  const firstTypedRef = useRef<Typed>();
-  const secondRef = useRef(null);
-  const secondTypedRef = useRef<Typed>();
-
-  const options = {
-	typeSpeed: 100,
-	fadeOut: true,
-	showCursor: false,
-	smartBackspace: false,
-	loop: true,
-	loopCount: Infinity,
-  }
-
-  useEffect(() => {
-	firstTypedRef.current = new Typed(firstRef.current as any, {
-	  strings: ["Easy.", "Free.", "Minimal."],
-	  backDelay: 2500,
-	  ...options,
-	})
-	secondTypedRef.current = new Typed(secondRef.current as any, {
-	  strings: ["Customizable.", "Open Source.", "Extensible."],
-	  backDelay: 5000,
-	  ...options,
-	})
-	return () => {
-	  firstTypedRef?.current?.destroy();
-	  secondTypedRef?.current?.destroy();
-	}
-  }, [])
-
-
   return (
 	<section
 	  className="block grid grid-cols-1 lg:grid-cols-2 gap-2 min-h-screen bg-darker text-white pt-[16vh] lg:pt-0">
 	  <div
 		className="lg:flex lg:items-center h-full w-[86vw] lg:w-5/6 2xl:w-4/5 mx-auto">
 		<div>
-		  <HeaderText>
-			<span ref={firstRef}/>
-		  </HeaderText>
-		  <HeaderText>
-			<span ref={secondRef}/>
-		  </HeaderText>
+		  <TextLoop interval={2500}>
+			<HeaderText>Easy.</HeaderText>
+			<HeaderText>Free.</HeaderText>
+			<HeaderText>Minimal.</HeaderText>
+		  </TextLoop>
+		  <br/>
+		  <TextLoop interval={7500}>
+			<HeaderText>Customizable.</HeaderText>
+			<HeaderText>Open-Source.</HeaderText>
+			<HeaderText>Extensible.</HeaderText>
+		  </TextLoop>
 		  <p className="lg:w-5/6 text-base lg:text-lg text-neutral-400 font-medium my-8">
 			With a simple, easy-to-use user interface, you can make a great resume in a matter of minutes. Customize and expand templates to
 			fit your needs, or even better, <b>code</b> your own templates.
@@ -71,7 +44,7 @@ const HeroSection = () => {
 }
 
 const HeaderText = ({children}: { children: React.ReactNode }) => (
-  <h1 className="block h-max text-5xl lg:text-[7rem] font-medium leading-tight">
+  <h1 className="block h-max text-5xl lg:text-[7rem] font-bold leading-tight">
 	{children}
   </h1>
 )
