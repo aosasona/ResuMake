@@ -27,7 +27,7 @@ const Features = () => {
 			is powered by one of the most popular front-end frameworks/libraries; React.js.
 		  </HomeFeature>
 		</div>
-		<p className="bg-darker text-neutral-200 text-sm leading-loose font-medium mt-8 px-6 py-8">
+		<p className="bg-darker text-neutral-200 text-sm leading-loose font-medium mt-8 px-8 py-8">
 		  If you're reading this, you're undoubtedly wondering who the target audience is for this product. That's great news, because it
 		  applies to everyone. This product was designed for anyone.
 		</p>
