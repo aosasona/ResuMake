@@ -3,7 +3,7 @@ import FormError from "../errors/FormError";
 import supabase from "../utils/supabase";
 
 const siteUrl = window.location.host
-const redirectUrl = `http://${siteUrl}/resume`
+const redirectUrl = `http://${siteUrl}/editor`
 
 export const handleAuthSubmit = async (data: {
   email: string;

@@ -44,7 +44,7 @@ const HeroSection = () => {
 }
 
 const HeaderText = ({children}: { children: React.ReactNode }) => (
-  <h1 className="block h-max text-5xl lg:text-[7rem] font-bold leading-tight">
+  <h1 className="block text-6xl md:text-[5rem] lg:text-[7rem] font-bold my-2 lg:my-1">
 	{children}
   </h1>
 )

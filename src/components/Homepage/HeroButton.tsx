@@ -1,6 +1,6 @@
 import {FC} from "react";
-import {ButtonProps} from "../types/form";
-import Spinner from "./Spinner";
+import {ButtonProps} from "../../types/form";
+import Spinner from "../Spinner";
 
 const HeroButton: FC<ButtonProps> = ({
   children,

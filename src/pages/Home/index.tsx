@@ -1,4 +1,6 @@
-import HeroSection from "../../components/HeroSection";
+import Features from "../../components/Homepage/Features";
+import Footer from "../../components/Homepage/Footer";
+import HeroSection from "../../components/Homepage/HeroSection";
 import Nav from "../../components/Nav";
 
 const Home = () => {
@@ -7,9 +9,8 @@ const Home = () => {
 	  <Nav/>
 	  <main className="">
 		<HeroSection/>
-		<section className="w-[86vw] lg:w-5/6 2xl:w-4/5 mx-auto text-dark py-12">
-		  <h1>HI</h1>
-		</section>
+		<Features/>
+		<Footer/>
 	  </main>
 	</>
   );

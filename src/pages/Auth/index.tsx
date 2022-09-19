@@ -16,7 +16,7 @@ export default function Auth() {
   const {user} = useAuth();
 
   if (user) {
-	navigate("/resume");
+	navigate("/editor");
   }
 
   const [status, setStatus] = useState({

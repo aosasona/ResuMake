@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import './index.css';
 import Auth from "./pages/Auth";
+import Editor from "./pages/Editor";
 import NotFound from "./pages/Errors/NotFound";
 import Home from "./pages/Home";
 
@@ -16,12 +17,16 @@ const rawRoutes = [
 	element: <Auth/>,
   },
   {
+	path: "/editor",
+	element: <Editor/>,
+  },
+  {
 	path: "privacy-policy",
-	element: <div>About</div>,
+	element: <div>Privacy</div>,
   },
   {
 	path: "terms-and-conditions",
-	element: <div>Terms</div>,
+	element: <div>Terms and conditions</div>,
   },
   {
 	path: "*",
