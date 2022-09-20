@@ -54,16 +54,33 @@ export interface EducationHistoryInterface {
 }
 
 export interface ResumeData {
+  id?: string;
   first_name: string;
   last_name: string;
   title: string;
   email: string;
   phone_number: string;
   cover_letter: string;
-  address: AddressInterface;
-  skills: SkillsInterface[];
-  languages: string[];
-  work_history: WorkHistoryInterface[];
-  links: LinksInterface[];
-  education_history: EducationHistoryInterface[];
+  address: AddressInterface | null;
+  skills: SkillsInterface[] | null;
+  languages: string[] | null;
+  work_history: WorkHistoryInterface[] | null;
+  links: LinksInterface[] | null;
+  education_history: EducationHistoryInterface[] | null;
+  template: string;
+  show_email: boolean;
+}
+
+export interface ResumeThemeInterface {
+  bg?: string;
+  colors?: {
+	primary: string;
+	secondary: string;
+	tertiary: string;
+  }
+}
+
+export interface ResumePageProps {
+  theme?: ResumeThemeInterface;
+  data: ResumeData;
 }

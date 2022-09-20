@@ -25,6 +25,13 @@ export interface ButtonProps {
   children?: ReactNode;
 }
 
+export interface CheckBoxProps {
+  name: string;
+  label: string;
+  data: any;
+  onChange: Function;
+}
+
 export interface SpinnerProps {
   size?: number;
 }

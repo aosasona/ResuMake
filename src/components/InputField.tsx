@@ -24,7 +24,7 @@ const InputField: FC<InputFieldProps> = ({
   }
 
   return (
-	<div className="flex flex-col my-1 transition-all">
+	<div className="w-full flex flex-col my-1 transition-all">
 	  <AnimatePresence>
 		{isFocused &&
           <motion.label

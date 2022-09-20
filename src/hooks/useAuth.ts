@@ -7,6 +7,10 @@ const useAuth = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+	supabase.auth.onAuthStateChange((event, session) => {
+	  setUser(session?.user ?? null);
+	  setLoading(false);
+	})
 	const session = supabase.auth.session()
 	const authenticatedUser = session?.user ?? null
 	setUser(authenticatedUser)
