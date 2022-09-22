@@ -1,6 +1,9 @@
 import FooterLink from "./FooterLink";
 
 const Footer = () => {
+
+  const currentYear = new Date().getFullYear()
+
   return (
 	<footer className="bg-darker px-12">
 	  <div className="flex flex-col lg:flex-row lg:justify-evenly gap-10 pt-[10vh] pt-[6vh]">
@@ -15,8 +18,8 @@ const Footer = () => {
 		  <FooterLink title="FAQs" href="/faqs"/>
 		</section>
 	  </div>
-	  <p className="text-sm text-center text-neutral-400 py-20">
-		&copy; 2021 ResuMake. All rights reserved.
+	  <p className="text-xs text-center text-neutral-500 font-light py-20">
+		&copy; {currentYear} ResuMake. All rights reserved.
 	  </p>
 	</footer>
   )

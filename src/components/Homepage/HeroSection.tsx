@@ -7,7 +7,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   return (
 	<section
-	  className="block grid grid-cols-1 lg:grid-cols-2 gap-2 min-h-screen bg-darker text-white pt-[16vh] lg:pt-0">
+	  className="block grid grid-cols-1 lg:grid-cols-2 gap-2 min-h-screen bg-darker text-white pt-[15vh] lg:pt-0">
 	  <div
 		className="lg:flex lg:items-center h-full w-[86vw] lg:w-5/6 2xl:w-4/5 mx-auto">
 		<div>
@@ -17,12 +17,12 @@ const HeroSection = () => {
 			<HeaderText>Minimal.</HeaderText>
 		  </TextLoop>
 		  <br/>
-		  <TextLoop interval={7500}>
+		  <TextLoop interval={10000}>
 			<HeaderText>Customizable.</HeaderText>
 			<HeaderText>Open-Source.</HeaderText>
 			<HeaderText>Extensible.</HeaderText>
 		  </TextLoop>
-		  <p className="lg:w-5/6 text-base lg:text-lg text-neutral-400 font-medium my-8">
+		  <p className="lg:w-5/6 text-base lg:text-lg text-neutral-500 font-normal my-8">
 			With a simple, easy-to-use user interface, you can make a great resume in a matter of minutes. Customize and expand templates to
 			fit your needs, or even better, <b>code</b> your own templates.
 		  </p>
@@ -44,7 +44,7 @@ const HeroSection = () => {
 }
 
 const HeaderText = ({children}: { children: React.ReactNode }) => (
-  <h1 className="block text-6xl md:text-[5rem] lg:text-[7rem] font-bold my-2 lg:my-1">
+  <h1 className="block text-5xl md:text-[5rem] lg:text-[6rem] font-bold my-1 lg:my-1">
 	{children}
   </h1>
 )

@@ -3,6 +3,7 @@ import {ReactNode} from 'react';
 export interface HomeFeatureProps {
   title: string;
   Icon: any;
+  url?: string;
   children: ReactNode;
 }
 

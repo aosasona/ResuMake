@@ -98,10 +98,10 @@ const Mono: FC<ResumePageProps> = ({theme = {}, data}) => {
 	>
 	  <Page size="A4" wrap={true} style={styles.page}>
 		<View>
-		  <Text style={styles.nameText}>{data?.first_name}</Text>
-		  <Text style={styles.nameText}>{data?.last_name}</Text>
+		  {data?.first_name && <Text style={styles.nameText}>{data?.first_name}</Text>}
+		  {data.last_name && <Text style={styles.nameText}>{data?.last_name}</Text>}
 		</View>
-		<Text style={styles.professional_title}>{data?.title}</Text>
+		{data?.title && <Text style={styles.professional_title}>{data?.title}</Text>}
 		<View style={styles.main}>
 		  <View style={styles.minor_section}>
 			<View>

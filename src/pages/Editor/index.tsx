@@ -8,6 +8,7 @@ import LogoutFAB from "../../components/LogoutFAB";
 import Spinner from "../../components/Spinner";
 import useAuth from "../../hooks/useAuth";
 import useResumeData from "../../hooks/useResumeData";
+import {updateResumeData} from "../../services/resume";
 import {ResumeData} from "../../types/resume";
 
 const Editor = () => {
@@ -24,7 +25,7 @@ const Editor = () => {
   }
 
   const {loading, data: currentResumeData, error} = useResumeData(user);
-  const [changed, setChanged] = useState(false);
+  const [saving, setSaving] = useState(false);
   const [data, setData] = useState<ResumeData>(currentResumeData || {
 	id: user?.id || "",
 	first_name: "",
@@ -57,9 +58,12 @@ const Editor = () => {
 	}
   }, [currentResumeData])
 
-  // useEffect(() => {
-  // updateResumeData(data).then()
-  // }, [data])
+  useEffect(() => {
+	if (JSON.stringify(data) !== JSON.stringify(currentResumeData) && !loading) {
+	  setSaving(true);
+	  updateResumeData(data).then().finally(() => setSaving(false));
+	}
+  }, [data])
 
   const Template = data?.template ? require(`../../themes/${data.template}`).default : null;
 
