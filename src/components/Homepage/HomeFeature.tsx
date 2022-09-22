@@ -4,7 +4,7 @@ import {HomeFeatureProps} from "../../types/home";
 const HomeFeature: FC<HomeFeatureProps> = ({title, Icon, url = "", children}) => {
   return (
 	<div
-	  className="flex flex-col gap-5 h-full border border-neutral-800 hover:cursor-pointer rounded px-7 py-8 transition-all"
+	  className="flex flex-col gap-5 h-full border border-neutral-800 hover:cursor-pointer rounded px-7 py-10 transition-all"
 	>
 	  <div className="w-min aspect-square bg-darker text-neutral-50 p-4 rounded">
 		<Icon size={16}/>
@@ -14,7 +14,7 @@ const HomeFeature: FC<HomeFeatureProps> = ({title, Icon, url = "", children}) =>
 		{children}
 	  </p>
 
-	  <a href={url} className="text-darker hover:text-opacity-50 text-sm font-medium text-right mt-auto underline underline-offset-2 px-1">
+	  <a href={url} className="text-darker hover:text-opacity-50 text-sm font-medium text-right mt-auto underline underline-offset-2 px-2">
 		Read more
 	  </a>
 	</div>
