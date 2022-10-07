@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-pdf/renderer": "^3.0.0",
     "@supabase/supabase-js": "^1.35.6",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -52,7 +51,6 @@
   },
   "devDependencies": {
     "@types/react-icons": "^3.0.0",
-    "@types/react-pdf": "^5.7.2",
     "autoprefixer": "^10.4.11",
     "postcss": "^8.4.16",
     "tailwindcss": "^3.1.8"

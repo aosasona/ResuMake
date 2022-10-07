@@ -1,4 +1,3 @@
-import {PDFViewer} from '@react-pdf/renderer';
 import {ReactNode, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import CheckBox from "../../components/CheckBox";
@@ -90,11 +89,12 @@ const Editor = () => {
 			<CheckBox name="show_email" label="Display E-mail on resume" data={data} onChange={setData}/>
 		  </div>
 		</section>
-		<section className="h-screen bg-neutral-50">
-		  <div className="w-max mx-auto">
-			<PDFViewer width={dimensions.width} height={dimensions.height} showToolbar={false}>
-			  <Template data={data}/>
-			</PDFViewer>
+		<section className="h-screen relative bg-neutral-50">
+		  <div className="w-full h-full pr-[6vw]">
+			<Template data={data}/>
+		  </div>
+		  <div className="w-[5vw] max-w-[80px] absolute h-screen top-0 bottom-0 right-0 bg-neutral-100 drop-shadow-lg">
+			{/* TOOLS GO HERE */}
 		  </div>
 		</section>
 	  </main>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import ErrorBoundary from "./components/ErrorBoundary";
 import './index.css';
 import Auth from "./pages/Auth";
 import Editor from "./pages/Editor";
@@ -46,4 +47,4 @@ const router = createBrowserRouter(routes);
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
-root.render(<RouterProvider router={router}/>);
+root.render(<ErrorBoundary><RouterProvider router={router}/></ErrorBoundary>);
