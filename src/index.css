@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:100,200,300,400,500,700,800,900&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,700,800,900&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700&display=swap");
 @import url(https://fonts.googleapis.com/css?family=Space+Grotesk:100,200,300,400,500,600,700&display=swap);
 
 * {
@@ -34,6 +34,18 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+
+.small-spinner {
+    width: 20px;
+    aspect-ratio: 1/1;
+    border: 3px solid rgb(0 0 0 / 10%);
+    border-top: 3px solid rgb(0 0 0 / 80%);
+    border-radius: 50%;
+    animation: spin 400ms linear infinite;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
 }
 
 .spinner {

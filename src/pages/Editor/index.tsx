@@ -1,6 +1,9 @@
 import {ReactNode, useEffect, useState} from "react";
+import {FiSave} from "react-icons/fi";
 import {useNavigate} from "react-router-dom";
 import CheckBox from "../../components/CheckBox";
+import IconButton from "../../components/Editor/IconButton";
+import {SavingIndicator} from "../../components/Editor/SavingIndicator";
 import InputField from "../../components/InputField";
 import Layout from "../../components/Layout";
 import LogoutFAB from "../../components/LogoutFAB";
@@ -12,11 +15,13 @@ import {ResumeData} from "../../types/resume";
 
 const Editor = () => {
   const navigate = useNavigate();
-  const {user} = useAuth();
+  const {user, loading: authLoading} = useAuth();
 
-  if (!user) {
-	navigate("/auth");
-  }
+  useEffect(() => {
+	if (!user && !authLoading) {
+	  navigate("/auth");
+	}
+  }, [authLoading])
 
   const dimensions = {
 	width: window.innerWidth * 0.5,
@@ -57,14 +62,19 @@ const Editor = () => {
 	}
   }, [currentResumeData])
 
-  useEffect(() => {
-	if (JSON.stringify(data) !== JSON.stringify(currentResumeData) && !loading) {
-	  setSaving(true);
-	  updateResumeData(data).then().finally(() => setSaving(false));
-	}
-  }, [data])
+  // useEffect(() => {
+  // if (JSON.stringify(data) !== JSON.stringify(currentResumeData) && !loading) {
+  //   setSaving(true);
+  //   updateResumeData(data).then().finally(() => setSaving(false));
+  // }
+  // }, [data])
 
-  const Template = data?.template ? require(`../../themes/${data.template}`).default : null;
+  function handleSave() {
+	setSaving(true);
+	updateResumeData({data, userId: user?.id as string}).then().finally(() => setSaving(false));
+  }
+
+  const Template = data?.template ? require(`../../themes/${data.template}`).default : require(`../../themes/Mono`).default;
 
   if (loading) {
 	return (
@@ -78,6 +88,7 @@ const Editor = () => {
 
   return (
 	<Layout title="Editor">
+	  {saving && <SavingIndicator/>}
 	  <main className="max-w-screen max-h-screen grid grid-cols-2">
 		<section className="w-[86%] h-screen mx-auto overflow-y-scroll pt-[5vh]">
 		  <SectionHeader>Personal details</SectionHeader>
@@ -90,11 +101,18 @@ const Editor = () => {
 		  </div>
 		</section>
 		<section className="h-screen relative bg-neutral-50">
-		  <div className="w-full h-full pr-[6vw]">
+		  <div className="w-full h-full max-h-screen overflow-y-auto pr-[6vw]">
 			<Template data={data}/>
 		  </div>
-		  <div className="w-[5vw] max-w-[80px] absolute h-screen top-0 bottom-0 right-0 bg-neutral-100 drop-shadow-lg">
+		  <div
+			className="w-[5vw] max-w-[75px] flex flex-col justify-evenly items-center absolute h-screen top-0 bottom-0 right-0 bg-neutral-100 drop-shadow-lg">
 			{/* TOOLS GO HERE */}
+
+			<IconButton
+			  Icon={FiSave}
+			  title="Save" disabled={JSON.stringify(data) === JSON.stringify(currentResumeData)}
+			  onClick={handleSave}
+			/>
 		  </div>
 		</section>
 	  </main>
