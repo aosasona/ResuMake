@@ -10,17 +10,25 @@ const InputField: FC<InputFieldProps> = ({
   data,
   required = true,
   onChange,
+  isNested = false,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+	if (isNested) {
+	  onChange(event);
+	  return
+	}
+
 	onChange({
 	  ...data,
 	  [name]: event?.target?.value,
 	})
   };
 
-  if (!Object.keys(data).includes(name)) {
-	throw new Error(`The data object does not contain the key - ${name}`);
+  if (!isNested) {
+	if (!Object.keys(data).includes(name)) {
+	  throw new Error(`The data object does not contain the key - ${name}`);
+	}
   }
 
   return (
@@ -39,7 +47,8 @@ const InputField: FC<InputFieldProps> = ({
           </motion.label>}
 	  </AnimatePresence>
 	  <input
-		value={data[name]}
+		name={name}
+		value={data ? data[name] : "" || ""}
 		type={type || "text"}
 		placeholder={isFocused ? "" : placeholder || label}
 		required={required}

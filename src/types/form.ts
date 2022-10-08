@@ -7,7 +7,8 @@ export interface InputFieldProps {
   label: string;
   placeholder?: string;
   required?: boolean;
-  onChange: Function;
+  isNested?: boolean;
+  onChange: (e: any) => void;
 }
 
 export interface ButtonProps {

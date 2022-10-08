@@ -1,6 +1,6 @@
 export interface IconButtonsProps {
   Icon: any;
-  title?: string;
+  title: string;
   disabled?: boolean;
   onClick: () => void;
 }

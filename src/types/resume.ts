@@ -1,10 +1,10 @@
+import {Dispatch, SetStateAction} from "react";
+
 export interface AddressInterface {
-  line_1: string;
-  line_2: string;
-  city: string;
-  state: string;
-  country: string;
-  postal_code: string;
+  city?: string;
+  state?: string;
+  country?: string;
+  postal_code?: string;
 }
 
 export interface SkillsInterface {
@@ -83,4 +83,32 @@ export interface ResumeThemeInterface {
 export interface ResumePageProps {
   theme?: ResumeThemeInterface;
   data: ResumeData;
+}
+
+export interface ResumeEditorProps {
+  data: ResumeData;
+  setData: Dispatch<SetStateAction<ResumeData>>;
+}
+
+export interface ResumeToolBarProps {
+  data: ResumeData;
+  currentResumeData: ResumeData;
+  theme: ResumeThemeInterface;
+  showToolbar: boolean;
+  showColorPicker: boolean;
+  setShowToolbar: Dispatch<SetStateAction<boolean>>;
+  setShowColorPicker: Dispatch<SetStateAction<boolean>>;
+  handleSave: () => void;
+  setTheme: Dispatch<SetStateAction<ResumeThemeInterface>>;
+}
+
+export interface ToolbarToggleProps {
+  visible: boolean;
+  onClick: () => void;
+}
+
+export interface ColorPickerProps {
+  theme: ResumeThemeInterface;
+  setTheme: Dispatch<SetStateAction<ResumeThemeInterface>>;
+  onClose: () => void;
 }

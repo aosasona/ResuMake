@@ -17,6 +17,12 @@ html, body {
     background-color: #F5F5F5;
 }
 
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
 .poppins {
     font-family: 'Poppins', sans-serif;
 }
@@ -45,7 +51,8 @@ html, body {
     animation: spin 400ms linear infinite;
     position: fixed;
     top: 1rem;
-    left: 1rem;
+    right: 1rem;
+    z-index: 9999999;
 }
 
 .spinner {

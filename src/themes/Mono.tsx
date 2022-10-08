@@ -1,17 +1,19 @@
+import parse from 'html-react-parser';
 import React from "react";
 import {ResumePageProps} from "../types/resume";
 import {normalizeFirstCaps, normalizePhoneNum} from "../utils/normalize";
 import templateStyles from "./styles/Mono.module.css";
 import utilStyles from "./styles/utils.module.css";
 
-const styles = {
+let styles = {
   ...templateStyles,
   ...utilStyles,
 } // this is to keep utilities styles and template styles separate and make the former available to all templates
 
-export default function Mono({data}: ResumePageProps) {
+export default function Mono({data, theme}: ResumePageProps) {
+
   return (
-	<main className={styles.container}>
+	<main className={styles.container} style={{backgroundColor: theme?.bg ? theme?.bg : ""}}>
 
 	  <header className={styles.header}>
 		<h1 className={styles.h1}>{data?.first_name} {data?.last_name}</h1>
@@ -23,7 +25,7 @@ export default function Mono({data}: ResumePageProps) {
 		}
 	  </header>
 
-	  <section className={`${styles.resume_body} ${styles.mt6}`}>
+	  <section className={`${styles.resume_body} ${styles.mt4}`}>
 
 
 		<div className={`${styles.section_container} ${styles.minor_section}`}>
@@ -40,12 +42,25 @@ export default function Mono({data}: ResumePageProps) {
               <p>{normalizePhoneNum(data?.phone_number)}</p>
             </FieldContainer>
 		  }
+		  {(data?.address?.city
+			  || data?.address?.state
+			  || data?.address?.country
+			  || data?.address?.postal_code) &&
+            <FieldContainer>
+              <FieldHeader>Address</FieldHeader>
+			  {data?.address?.city && <p>{data?.address?.city}</p>}
+			  {data?.address?.state && <p>{data?.address?.state}</p>}
+			  {data?.address?.country && <p>{data?.address?.country}</p>}
+			  {data?.address?.postal_code && <p>{data?.address?.postal_code}</p>}
+            </FieldContainer>
+		  }
 		</div>
 
 
 		<div className={styles.major_section}>
 		  <div className={styles.section_container}>
 			<FieldHeader>Personal Summary</FieldHeader>
+			{parse(data?.cover_letter)}
 		  </div>
 		</div>
 

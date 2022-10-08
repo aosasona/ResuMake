@@ -1,17 +1,18 @@
-import {ReactNode, useEffect, useState} from "react";
-import {FiSave} from "react-icons/fi";
+import {AnimatePresence} from "framer-motion";
+import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import CheckBox from "../../components/CheckBox";
-import IconButton from "../../components/Editor/IconButton";
+import ColorPicker from "../../components/Editor/ColorPicker";
+import EditorToolbar from "../../components/Editor/EditorToolbar";
+import ResumeEditor from "../../components/Editor/ResumeEditor";
 import {SavingIndicator} from "../../components/Editor/SavingIndicator";
-import InputField from "../../components/InputField";
+import ToolbarToggle from "../../components/Editor/ToolbarToggle";
 import Layout from "../../components/Layout";
 import LogoutFAB from "../../components/LogoutFAB";
 import Spinner from "../../components/Spinner";
 import useAuth from "../../hooks/useAuth";
 import useResumeData from "../../hooks/useResumeData";
 import {updateResumeData} from "../../services/resume";
-import {ResumeData} from "../../types/resume";
+import {ResumeData, ResumeThemeInterface} from "../../types/resume";
 
 const Editor = () => {
   const navigate = useNavigate();
@@ -23,13 +24,19 @@ const Editor = () => {
 	}
   }, [authLoading])
 
-  const dimensions = {
-	width: window.innerWidth * 0.5,
-	height: window.innerHeight,
-  }
-
   const {loading, data: currentResumeData, error} = useResumeData(user);
+
+  const [showToolbar, setShowToolbar] = useState(false);
+  const [showColorPicker, setShowColorPicker] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [theme, setTheme] = useState<ResumeThemeInterface>({
+	bg: "",
+	colors: {
+	  primary: "",
+	  secondary: "",
+	  tertiary: "",
+	},
+  })
   const [data, setData] = useState<ResumeData>(currentResumeData || {
 	id: user?.id || "",
 	first_name: "",
@@ -43,7 +50,7 @@ const Editor = () => {
 	work_history: null,
 	links: null,
 	languages: null,
-	address: null,
+	address: {city: "", state: ""},
 	template: "Mono",
 	show_email: true,
   })
@@ -54,12 +61,14 @@ const Editor = () => {
 	  email: user?.email || "",
 	  id: user?.id || "",
 	})
+	return
   }, [user])
 
   useEffect(() => {
 	if (currentResumeData) {
 	  setData(currentResumeData);
 	}
+	return
   }, [currentResumeData])
 
   // useEffect(() => {
@@ -89,43 +98,42 @@ const Editor = () => {
   return (
 	<Layout title="Editor">
 	  {saving && <SavingIndicator/>}
-	  <main className="max-w-screen max-h-screen grid grid-cols-2">
+	  <main className="max-w-screen max-h-screen h-screen grid grid-cols-2 overflow-hidden">
 		<section className="w-[86%] h-screen mx-auto overflow-y-scroll pt-[5vh]">
-		  <SectionHeader>Personal details</SectionHeader>
-		  <div className="w-full grid grid-cols-2 gap-4">
-			<InputField name="first_name" data={data} label="First name" onChange={setData}/>
-			<InputField name="last_name" data={data} label="Last name" onChange={setData}/>
-			<InputField name="title" data={data} label="Professional title" onChange={setData}/>
-			<InputField type="tel" name="phone_number" data={data} label="Phone number" onChange={setData}/>
-			<CheckBox name="show_email" label="Display E-mail on resume" data={data} onChange={setData}/>
-		  </div>
+		  <ResumeEditor data={data} setData={setData}/>
 		</section>
 		<section className="h-screen relative bg-neutral-50">
-		  <div className="w-full h-full max-h-screen overflow-y-auto pr-[6vw]">
-			<Template data={data}/>
+		  <div className="absolute top-0 left-0 right-0 flex justify-between py-3 px-3">
+			<ToolbarToggle visible={showToolbar} onClick={() => setShowToolbar(!showToolbar)}/>
+			<LogoutFAB/>
 		  </div>
-		  <div
-			className="w-[5vw] max-w-[75px] flex flex-col justify-evenly items-center absolute h-screen top-0 bottom-0 right-0 bg-neutral-100 drop-shadow-lg">
-			{/* TOOLS GO HERE */}
-
-			<IconButton
-			  Icon={FiSave}
-			  title="Save" disabled={JSON.stringify(data) === JSON.stringify(currentResumeData)}
-			  onClick={handleSave}
-			/>
+		  <div className="w-full h-full max-h-screen flex items-center justify-center">
+			<div className="max-h-[92vh] aspect-[1/1.414]">
+			  <Template data={data} theme={theme}/>
+			</div>
 		  </div>
+		  <AnimatePresence>
+			{showToolbar &&
+              <EditorToolbar
+                data={data}
+                theme={theme}
+                showToolbar={showToolbar}
+                showColorPicker={showColorPicker}
+                currentResumeData={currentResumeData || {} as ResumeData}
+                setShowColorPicker={setShowColorPicker}
+                setShowToolbar={setShowToolbar}
+                setTheme={setTheme}
+                handleSave={handleSave}
+              />}
+		  </AnimatePresence>
+		  <AnimatePresence>
+			{showColorPicker && <ColorPicker theme={theme} setTheme={setTheme} onClose={() => setShowColorPicker(false)}/>}
+		  </AnimatePresence>
 		</section>
 	  </main>
-	  <LogoutFAB/>
 	</Layout>
   )
 }
 
-const SectionHeader = ({children}: { children: ReactNode }) => (
-  <>
-	<h2 className="text-xl font-bold">{children}</h2>
-	<hr className="text-neutral-700 my-4"/>
-  </>
-)
 
 export default Editor
