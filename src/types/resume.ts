@@ -64,9 +64,9 @@ export interface ResumeData {
   address: AddressInterface | null;
   skills: SkillsInterface[] | null;
   languages: string[] | null;
-  work_history: WorkHistoryInterface[] | null;
+  work_history: WorkHistoryInterface[] | [];
   links: LinksInterface[] | null;
-  education_history: EducationHistoryInterface[] | null;
+  education_history: EducationHistoryInterface[] | [];
   template: string;
   show_email: boolean;
 }
