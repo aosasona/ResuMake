@@ -1,6 +1,6 @@
 import {AnimatePresence, motion} from "framer-motion";
 import {ChangeEvent, FC, useState} from "react";
-import {InputFieldProps} from "../types/form";
+import {InputFieldProps} from "../../types/form";
 
 const InputField: FC<InputFieldProps> = ({
   name,
@@ -48,7 +48,7 @@ const InputField: FC<InputFieldProps> = ({
 	  </AnimatePresence>
 	  <input
 		name={name}
-		value={data ? data[name] : "" || ""}
+		value={data ? data[name] ? data[name] : "" : "" || ""}
 		type={type || "text"}
 		placeholder={isFocused ? "" : placeholder || label}
 		required={required}

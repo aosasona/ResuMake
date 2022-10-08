@@ -16,7 +16,8 @@ export default function Mono({data, theme}: ResumePageProps) {
 	<main className={styles.container} style={{backgroundColor: theme?.bg ? theme?.bg : ""}}>
 
 	  <header className={styles.header}>
-		<h1 className={styles.h1}>{data?.first_name} {data?.last_name}</h1>
+		<h1 className={styles.h1}>{data?.first_name}</h1>
+		<h1 className={styles.h1}>{data?.last_name}</h1>
 		{data?.title &&
           <>
             <div className={styles.my2}/>

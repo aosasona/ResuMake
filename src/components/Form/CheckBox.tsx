@@ -1,5 +1,5 @@
 import {FC} from "react";
-import {CheckBoxProps} from "../types/form";
+import {CheckBoxProps} from "../../types/form";
 
 const CheckBox: FC<CheckBoxProps> = ({name, label, data, onChange}) => {
 

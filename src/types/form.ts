@@ -30,7 +30,15 @@ export interface CheckBoxProps {
   name: string;
   label: string;
   data: any;
-  onChange: Function;
+  onChange: (e: any) => void;
+}
+
+export interface SelectorProps {
+  name: string;
+  value: string;
+  options: any[];
+  placeholder: string;
+  onChange: any;
 }
 
 export interface SpinnerProps {
