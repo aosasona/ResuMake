@@ -1,7 +1,8 @@
 import parse from 'html-react-parser';
 import React from "react";
+import Moment from "react-moment";
 import {ResumePageProps} from "../types/resume";
-import {normalizeFirstCaps, normalizePhoneNum} from "../utils/normalize";
+import {normalizeDate, normalizeFirstCaps, normalizePhoneNum} from "../utils/normalize";
 import templateStyles from "./styles/Mono.module.css";
 import utilStyles from "./styles/utils.module.css";
 
@@ -12,8 +13,13 @@ let styles = {
 
 export default function Mono({data, theme}: ResumePageProps) {
 
+  const normDate = (date: string) => {
+	date = normalizeDate(date)
+	return <Moment format="MMM YYYY" date={new Date(date)}/>
+  }
+
   return (
-	<main className={styles.container} style={{backgroundColor: theme?.bg ? theme?.bg : ""}}>
+	<main className={styles.container} style={{backgroundColor: theme?.bg?.value ? theme?.bg?.value : ""}}>
 
 	  <header className={styles.header}>
 		<h1 className={styles.header1}>{data?.first_name}</h1>
@@ -28,18 +34,17 @@ export default function Mono({data, theme}: ResumePageProps) {
 
 	  <section className={`${styles.resume_body} ${styles.mt4}`}>
 
-
 		<div className={`${styles.section_container} ${styles.minor_section}`}>
 		  {data.show_email &&
             <FieldContainer>
-              <FieldHeader>Email</FieldHeader>
+              <MinorFieldHeader>Email</MinorFieldHeader>
               <p>{data?.email}</p>
             </FieldContainer>
 		  }
 
 		  {data?.phone_number &&
             <FieldContainer>
-              <FieldHeader>Phone number</FieldHeader>
+              <MinorFieldHeader>Phone number</MinorFieldHeader>
               <p>{normalizePhoneNum(data?.phone_number)}</p>
             </FieldContainer>
 		  }
@@ -48,7 +53,7 @@ export default function Mono({data, theme}: ResumePageProps) {
 			  || data?.address?.country
 			  || data?.address?.postal_code) &&
             <FieldContainer>
-              <FieldHeader>Address</FieldHeader>
+              <MinorFieldHeader>Address</MinorFieldHeader>
 			  {data?.address?.city && <p>{data?.address?.city}</p>}
 			  {data?.address?.state && <p>{data?.address?.state}</p>}
 			  {data?.address?.country && <p>{data?.address?.country}</p>}
@@ -62,12 +67,52 @@ export default function Mono({data, theme}: ResumePageProps) {
 		  <div className={styles.section_container}>
 			<FieldHeader>Personal Summary</FieldHeader>
 			{parse(data?.cover_letter)}
+
+			{data?.education_history?.length > 1 && <>
+              <div className={styles.my6}/>
+
+              <FieldHeader>Education History</FieldHeader>
+			  {data?.education_history?.map((item, index) => (
+				<div key={index}>
+				  {item?.name && <div className={styles.education_container}>
+                    <div className={styles.education_title_container}>
+                      <h2 className={styles.education_title}>
+						{item?.degree && `${item?.degree}, `}{item?.name}
+                      </h2>
+                      <h3 className={styles.education_location}>
+						{item?.state && `${item?.state}, `}{item?.country}
+                      </h3>
+                    </div>
+                    <p className={styles.education_date}>
+					  {item?.start_date ? normDate(item?.start_date) : ""}
+					  {item?.end_date
+						? item?.start_date
+						  ? <> - {normDate(item?.end_date)}</>
+						  : normDate(item?.end_date)
+						: item?.start_date
+						  ? ` - Present`
+						  : "Present"}
+                    </p>
+					{item?.description && <div className={styles.mt2}>
+					  {parse(item?.description)}
+                    </div>}
+                  </div>}
+				</div>
+			  ))}
+            </>}
 		  </div>
 		</div>
 
-
 	  </section>
 	</main>
+  )
+}
+
+function MinorFieldHeader({children}: { children: React.ReactNode }) {
+  return (
+	<h3 className={styles.minor_field_header}>
+	  {children}
+	</h3>
   )
 }
 

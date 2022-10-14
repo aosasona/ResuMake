@@ -13,3 +13,9 @@ export const normalizePhoneNum = (phoneNum: string) => {
   }
   return phoneNum
 }
+
+export const normalizeDate = (date: string) => {
+  const rawDate = date.split("-")
+  // date = rawDate[1] + "/" + rawDate[2] + "/" + rawDate[0]
+  return new Date(date).toISOString()
+}

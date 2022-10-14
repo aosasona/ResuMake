@@ -12,3 +12,8 @@ export interface FooterProps {
   href: string;
   newTab?: boolean;
 }
+
+export interface FAQProps {
+  question: string;
+  children: ReactNode;
+}

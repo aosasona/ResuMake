@@ -4,10 +4,10 @@ import HomeFeature from "./HomeFeature";
 
 const Features = () => {
   return (
-	<section className="w-[86vw] lg:w-5/6 2xl:w-4/5 lg:h-screen lg:flex lg:items-center mx-auto text-dark pt-16 pb-20">
+	<section className="w-[88vw] lg:w-5/6 2xl:w-4/5 lg:h-screen lg:flex lg:items-center mx-auto text-dark pt-16">
 	  <div>
 		<h1 className="text-5xl lg:text-7xl text-left font-bold text-black">Features</h1>
-		<p className="text-left text-base text-neutral-400 font-normal py-5">
+		<p className="text-left text-sm text-neutral-400 font-normal py-5">
 		  We have quite a couple of major features to make your resume building experience as easy and interesting as possible.
 		</p>
 		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-7 mt-5 lg:mt-8">

@@ -1,6 +1,7 @@
 import {AnimatePresence} from "framer-motion";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {AutoSavePopup} from "../../components/Editor/AutoSavePopup";
 import ColorPicker from "../../components/Editor/ColorPicker";
 import EditorToolbar from "../../components/Editor/EditorToolbar";
 import ResumeEditor from "../../components/Editor/ResumeEditor";
@@ -14,6 +15,8 @@ import useResumeData from "../../hooks/useResumeData";
 import {updateResumeData} from "../../services/resume";
 import {ResumeData, ResumeThemeInterface} from "../../types/resume";
 
+const lodash = require("lodash");
+
 const Editor = () => {
   const navigate = useNavigate();
   const {user, loading: authLoading} = useAuth();
@@ -26,15 +29,27 @@ const Editor = () => {
 
   const {loading, data: currentResumeData, error} = useResumeData(user);
 
+  const [autoSavePopup, setAutoSavePopup] = useState(false);
   const [showToolbar, setShowToolbar] = useState(false);
   const [showColorPicker, setShowColorPicker] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [formerResumeData, setFormerResumeData] = useState<ResumeData | null>(null);
   const [theme, setTheme] = useState<ResumeThemeInterface>({
-	bg: "",
-	colors: {
-	  primary: "",
-	  secondary: "",
-	  tertiary: "",
+	bg: {
+	  name: "",
+	  value: "",
+	},
+	primary: {
+	  name: "",
+	  value: "",
+	},
+	secondary: {
+	  name: "",
+	  value: "",
+	},
+	tertiary: {
+	  name: "",
+	  value: "",
 	},
   })
   const [data, setData] = useState<ResumeData>(currentResumeData || {
@@ -56,31 +71,65 @@ const Editor = () => {
   })
 
   useEffect(() => {
+	const handleKeyDown = (e: KeyboardEvent) => {
+	  if ((e.ctrlKey || e.metaKey) && e.key?.toLowerCase() === "s") {
+		e.preventDefault();
+		handleSave();
+	  }
+	}
+	document.addEventListener("keydown", handleKeyDown);
+	return () => {
+	  document.removeEventListener("keydown", handleKeyDown);
+	}
+  }, [])
+
+  useEffect(() => {
 	setData({
 	  ...data,
 	  email: user?.email || "",
 	  id: user?.id || "",
 	})
-	return
   }, [user])
 
   useEffect(() => {
 	if (currentResumeData) {
 	  setData(currentResumeData);
+	  setFormerResumeData(currentResumeData);
 	}
-	return
   }, [currentResumeData])
 
-  // useEffect(() => {
-  // if (JSON.stringify(data) !== JSON.stringify(currentResumeData) && !loading) {
-  //   setSaving(true);
-  //   updateResumeData(data).then().finally(() => setSaving(false));
-  // }
-  // }, [data])
+  useEffect(() => {
+	const timeout = setTimeout(() => {
+	  setAutoSavePopup(false);
+	}, 3000)
+
+	return () => {
+	  clearTimeout(timeout);
+	}
+  }, [autoSavePopup])
+
+  useEffect(() => {
+	const timeout = setTimeout(() => {
+	  if (formerResumeData && !lodash.isEqual(formerResumeData, data) && !saving && user) {
+		setAutoSavePopup(true);
+		handleSave()
+		setFormerResumeData(data);
+	  }
+	}, 1500)
+
+	return () => {
+	  clearTimeout(timeout);
+	}
+  }, [data, user])
 
   function handleSave() {
-	setSaving(true);
-	updateResumeData({data, userId: user?.id as string}).then().finally(() => setSaving(false));
+	if (user) {
+	  setSaving(true);
+	  updateResumeData({data, userId: user?.id as string})
+		.then()
+		.catch(console.log)
+		.finally(() => setSaving(false));
+	}
   }
 
   const Template = data?.template ? require(`../../themes/${data.template}`).default : require(`../../themes/Mono`).default;
@@ -98,9 +147,12 @@ const Editor = () => {
   return (
 	<Layout title="Editor">
 	  {saving && <SavingIndicator/>}
+	  <AutoSavePopup visible={autoSavePopup}/>
 	  <main className="max-w-screen max-h-screen h-screen grid grid-cols-2 overflow-hidden">
-		<section className="w-[86%] h-screen mx-auto overflow-y-scroll pt-[5vh]">
-		  <ResumeEditor data={data} setData={setData}/>
+		<section className=" h-screen mx-auto overflow-y-scroll hide-scrollbar">
+		  <div className="w-[86%] mx-auto py-[5vh]">
+			<ResumeEditor data={data} setData={setData}/>
+		  </div>
 		</section>
 		<section className="h-screen relative bg-neutral-50">
 		  <div className="absolute top-0 left-0 right-0 flex justify-between py-3 px-3">
@@ -119,7 +171,7 @@ const Editor = () => {
                 theme={theme}
                 showToolbar={showToolbar}
                 showColorPicker={showColorPicker}
-                currentResumeData={currentResumeData || {} as ResumeData}
+                currentResumeData={formerResumeData || {} as ResumeData}
                 setShowColorPicker={setShowColorPicker}
                 setShowToolbar={setShowToolbar}
                 setTheme={setTheme}

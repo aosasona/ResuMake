@@ -4,6 +4,8 @@ import {FiSave} from "react-icons/fi";
 import {ResumeToolBarProps} from "../../types/resume";
 import IconButton from "./IconButton";
 
+const lodash = require("lodash");
+
 export default function EditorToolbar({
   data,
   theme,
@@ -31,7 +33,6 @@ export default function EditorToolbar({
 	  <IconButton
 		title="Save"
 		Icon={FiSave}
-		disabled={JSON.stringify(data) === JSON.stringify(currentResumeData)}
 		onClick={handleSave}
 	  />
 	  <IconButton

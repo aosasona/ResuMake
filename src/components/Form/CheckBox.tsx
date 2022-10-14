@@ -1,9 +1,13 @@
 import {FC} from "react";
 import {CheckBoxProps} from "../../types/form";
 
-const CheckBox: FC<CheckBoxProps> = ({name, label, data, onChange}) => {
+const CheckBox: FC<CheckBoxProps> = ({name, label, data, isNested, onChange}) => {
 
   const handleChange = (val: boolean) => {
+	if (isNested) {
+	  onChange(val);
+	  return
+	}
 	onChange({
 	  ...data,
 	  [name]: val,

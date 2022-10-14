@@ -9,7 +9,7 @@ export default function ToolbarToggle({visible, onClick}: ToolbarToggleProps) {
 	>
 	  <div className="flex gap-1 items-center justify-center px-5 py-3">
 		<HiOutlineMenu size={16}/>
-		<p className="text-sm">Tools</p>
+		<p className="text-sm">Menu</p>
 	  </div>
 	</button>
   )

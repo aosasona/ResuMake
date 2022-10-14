@@ -51,6 +51,8 @@ export interface EducationHistoryInterface {
   end_date: string;
   current: boolean;
   description: string;
+  state: string;
+  country: string;
 }
 
 export interface ResumeData {
@@ -71,13 +73,16 @@ export interface ResumeData {
   show_email: boolean;
 }
 
+export interface ThemeColor {
+  name: string;
+  value: string;
+}
+
 export interface ResumeThemeInterface {
-  bg?: string;
-  colors?: {
-	primary: string;
-	secondary: string;
-	tertiary: string;
-  }
+  bg?: ThemeColor;
+  primary: ThemeColor;
+  secondary: ThemeColor;
+  tertiary: ThemeColor;
 }
 
 export interface ResumePageProps {

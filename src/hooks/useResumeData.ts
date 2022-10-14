@@ -21,6 +21,7 @@ export default function useResumeData(user: User | null) {
 		.catch(err => setError(err))
 		.finally(() => setLoading(false));
 	}
+	return
   }, [user]);
 
   return {data, loading, error};

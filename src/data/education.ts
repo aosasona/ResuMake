@@ -8,11 +8,11 @@ export const educationalDegrees = [
 	value: "a-level",
   },
   {
-	label: "Bachelor's Degree",
+	label: "BSc",
 	value: "bachelor",
   },
   {
-	label: "Master's Degree",
+	label: "Master's",
 	value: "master",
   },
   {

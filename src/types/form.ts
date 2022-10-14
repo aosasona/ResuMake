@@ -30,6 +30,7 @@ export interface CheckBoxProps {
   name: string;
   label: string;
   data: any;
+  isNested?: boolean;
   onChange: (e: any) => void;
 }
 
@@ -37,7 +38,17 @@ export interface SelectorProps {
   name: string;
   value: string;
   options: any[];
-  placeholder: string;
+  placeholder?: string;
+  onChange: any;
+}
+
+export interface DateInputProps {
+  name: string;
+  value: string;
+  label: string;
+  disabled?: boolean;
+  min?: string;
+  max?: string;
   onChange: any;
 }
 
