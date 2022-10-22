@@ -1,12 +1,11 @@
-
 import AlertError from "../errors/AlertError";
 import FormError from "../errors/FormError";
 import supabase from "../utils/supabase";
 
-const siteUrl = window.location.host
+const siteUrl = window?.location?.host
 const redirectUrl = `http://${siteUrl}/editor`
 
-export const handleAuthSubmit = async (data: {
+export const handleEmailLoginSubmit = async (data: {
   email: string;
   password: string;
 }) => {
@@ -38,7 +37,7 @@ export const handleAuthSubmit = async (data: {
 
 //
 
-export const handleCreateAccount = async (data: {
+export const handleEmailSignupSubmit = async (data: {
   email: string;
   password: string;
 }) => {
