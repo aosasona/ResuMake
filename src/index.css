@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:100,200,300,400,500,700,800,900&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700&display=swap");
 @import url(https://fonts.googleapis.com/css?family=Space+Grotesk:100,200,300,400,500,600,700&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Playfair+Display:100,200,300,400,500,600,700&display=swap);
 
 * {
     margin: 0;
@@ -10,7 +11,7 @@
 }
 
 html, body {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: "Poppins", "Space Grotesk", sans-serif;
     font-weight: 500;
     font-size: 13px;
     color: rgb(60 60 60);
@@ -24,15 +25,19 @@ html, body {
 }
 
 .poppins {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
 }
 
 .space-grotesk {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', sans-serif !important;
 }
 
 .quicksand {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Quicksand', sans-serif !important;
+}
+
+.playfair-display {
+    font-family: "Playfair Display", serif !important;
 }
 
 .absolute-center {

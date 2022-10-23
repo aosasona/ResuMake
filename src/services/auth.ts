@@ -2,10 +2,10 @@ import AlertError from "../errors/AlertError";
 import FormError from "../errors/FormError";
 import supabase from "../utils/supabase";
 
-const siteUrl = window.location.host
+const siteUrl = window?.location?.host
 const redirectUrl = `http://${siteUrl}/editor`
 
-export const handleAuthSubmit = async (data: {
+export const handleEmailLoginSubmit = async (data: {
   email: string;
   password: string;
 }) => {
@@ -33,6 +33,39 @@ export const handleAuthSubmit = async (data: {
 
   return {user, session};
 };
+
+
+//
+
+export const handleEmailSignupSubmit = async (data: {
+  email: string;
+  password: string;
+}) => {
+  const {email, password} = data;
+
+  if (!(email && password)) {
+	throw new FormError("Please fill all the fields");
+  }
+
+  if (password?.length < 6) {
+	throw new FormError("Password must be at least 6 characters long");
+  }
+
+  const {user, session, error} = await supabase.auth.signUp({
+	email,
+	password,
+  }, {
+	redirectTo: redirectUrl,
+  })
+
+  if (error) {
+	throw new FormError(error?.message);
+  }
+
+  return {user, session};
+};
+
+// 
 
 export const handleGithubAuth = async () => {
   const {user, session, error} = await supabase.auth.signIn({
