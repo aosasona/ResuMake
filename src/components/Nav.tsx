@@ -35,7 +35,7 @@ const Nav = () => {
 		  <div className="w-[86vw] lg:w-[88vw] flex items-center justify-between mx-auto">
 			  <div className="flex items-center gap-2">
 				  <img src={Logo} alt="logo" className="w-7 lg:w-9 aspect-square invert"/>
-				  <p className="text-2xl lg:text-3xl poppins text-white font-bold">Resumake</p>
+				  <p className="text-2xl lg:text-3xl space-grotesk text-white font-bold">Resumake</p>
 			  </div>
 
 			  <AnimatePresence>
